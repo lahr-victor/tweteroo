@@ -28,6 +28,15 @@ app.post("/tweets", (req, res) => {
     res.status(201).send("OK");
 });
 
+app.get("/tweets", (req, res) => {
+    const updatedTweets = tweets.slice(-10).map((tweet) => {
+        const user = users.find(user => user.username === tweet.username);
+        return { username: tweet.username, avatar: user.avatar, tweet: tweet.tweet }
+    });
+
+    res.status(200).send(updatedTweets);
+});
+
 app.listen(PORT_NUMBER, () =>
     console.log(`Running server on port ${PORT_NUMBER}`)
 );
