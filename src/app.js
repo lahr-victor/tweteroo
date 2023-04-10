@@ -1,17 +1,23 @@
+// PACKAGE IMPORTS
 import express from 'express';
 import cors from 'cors';
 
+// SERVER CONFIG
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+// GLOBAL CONSTANTS
 const PORT_NUMBER = 5000;
 
+// GLOBAL VARIABLES
 const users = [];
 const tweets = [];
 
+// ENDPOINTS
 app.post('/sign-up', (req, res) => {
   const { username, avatar } = req.body;
+
   users.push({ username, avatar });
   res.status(201).send('OK');
 });
@@ -37,4 +43,5 @@ app.get('/tweets', (req, res) => {
   res.status(200).send(updatedTweets);
 });
 
+// FUNCTIONS
 app.listen(PORT_NUMBER, () => console.log(`Running server on port ${PORT_NUMBER}`));
